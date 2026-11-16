@@ -1,11 +1,12 @@
 {
-  "name": "@project/bot",
+  "name": "bot",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "bun run --watch src/index.ts",
     "build": "echo bun runs the TypeScript directly",
     "start": "bun src/index.ts",
+    "pretest": "test -d .jobs || sh scripts/fetch-jobs.sh",
     "test": "bun test",
     "lint": "biome check .",
     "lint:fix": "biome check . --write"

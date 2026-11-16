@@ -1,6 +1,6 @@
 import { expect, test } from 'bun:test';
-import { handle } from '../../jobs/src/app';
-import { sqliteDb } from '../../jobs/src/store-bun';
+import { handle } from '../.jobs/src/app';
+import { sqliteDb } from '../.jobs/src/store-bun';
 import { advance, jobsClient, tick, type Checkpoint } from '../src/jobs';
 import { parseAsk, type Kind } from '../src/work';
 

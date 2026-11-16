@@ -26,3 +26,6 @@ coverage/
 # local demo poster key
 .seed-poster.key
 .wrangler/
+
+# jobs board source for the tests (scripts/fetch-jobs.sh)
+.jobs/
