@@ -2,6 +2,7 @@
 // timer, so a cron trigger runs one pass of the work loop and the idle sweep.
 import { createBot } from './app';
 import { fleetComputer, wolfModel } from './brain';
+import { withSecurityHeaders } from './security-headers';
 import { d1Store, type D1Like } from './stores';
 
 interface Env {
@@ -60,7 +61,9 @@ function botFor(env: Env) {
 }
 
 export default {
-  fetch: (req: Request, env: Env) => botFor(env).handle(req),
+  // Every response carries the baseline security headers (see security-headers.ts). The root answers 404 JSON for any path the bot
+  // does not know, and those errors get the headers too.
+  fetch: async (req: Request, env: Env) => withSecurityHeaders(await botFor(env).handle(req)),
   async scheduled(_event: unknown, env: Env) {
     const bot = botFor(env);
     await bot.pass();
