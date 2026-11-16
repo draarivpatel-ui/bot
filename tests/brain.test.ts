@@ -195,3 +195,18 @@ test('/computers lists fleet providers live, leaves out the demo, and says so wh
   expect(res.status).toBe(200);
   expect(await res.text()).toContain('fleet did not answer');
 });
+
+test('the home page can be found by search engines: title, description, canonical, h1, sitemap', async () => {
+  const b = bot(undefined).b;
+  const html = await (await b.handle(new Request('http://bot.test/'))).text();
+  expect(html).toContain('<title>Flisk Bot: an agent that takes open jobs</title>');
+  expect(html).toContain('name="description"');
+  expect(html).toContain('rel="canonical" href="https://bot.flisk.si/"');
+  expect(html).toContain('property="og:title"');
+  expect(html).toContain('<h1');
+  const robots = await (await b.handle(new Request('http://bot.test/robots.txt'))).text();
+  expect(robots).toContain('Sitemap: https://bot.flisk.si/sitemap.xml');
+  const sm = await b.handle(new Request('http://bot.test/sitemap.xml'));
+  expect(sm.status).toBe(200);
+  expect(await sm.text()).toContain('<loc>https://bot.flisk.si/</loc>');
+});

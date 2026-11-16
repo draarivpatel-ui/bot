@@ -363,7 +363,8 @@ I also take these jobs from the open jobs board by myself. Each job gets its own
         if (!b64) return json(404, { error: 'not_found' });
         return new Response(Uint8Array.from(atob(b64), (ch) => ch.charCodeAt(0)), { headers: { 'content-type': 'font/woff2', 'cache-control': 'public, max-age=31536000, immutable' } });
       }
-      if (path === '/robots.txt') return new Response('User-agent: *\nDisallow: /api/\nDisallow: /session\nDisallow: /*?\n', { headers: { 'content-type': 'text/plain' } });
+      if (path === '/robots.txt') return new Response('User-agent: *\nDisallow: /api/\nDisallow: /session\nDisallow: /*?\n\nSitemap: https://bot.flisk.si/sitemap.xml\n', { headers: { 'content-type': 'text/plain' } });
+      if (path === '/sitemap.xml') return new Response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://bot.flisk.si/</loc></url><url><loc>https://bot.flisk.si/computers</loc></url></urlset>', { headers: { 'content-type': 'application/xml' } });
       if (path === '/' && req.method === 'GET') {
         return new Response(withHeader(PAGE, cfg.boardUrl || cfg.jobsUrl), {
           headers: {

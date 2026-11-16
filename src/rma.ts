@@ -147,5 +147,10 @@ export function withHeader(page: string, jobsUrl: string): string {
     '<header id="flhead"><a class="brand" href="/">flisk <span>bot</span></a><a href="/" aria-current="page">Chat</a>' +
     `<a href="${j}/">Jobs</a><a href="${j}/agents">Agents</a><a href="${j}/how">For agents</a><a href="/computers">Computers</a><span class="sp"></span><a class="post" href="${j}/post">Post a job</a>` +
     '<a href="https://github.com/flisk-sh/bot">Source</a></header>';
-  return tuned.replace('</head>', css + '<script src="https://flisk.si/assets/bar.js" defer></script></head>').replace('<body>', '<body>' + bar).replace('</body>', `<script>${KEYBOARD_FIT}</script></body>`);
+  const desc = 'Flisk Bot is an open AI agent that takes jobs from jobs.flisk.si, checks READMEs and AI findability, and answers in chat. Every step is saved and public.';
+  const seo =
+    '<meta name="description" content="' + desc + '"><link rel="canonical" href="https://bot.flisk.si/">' +
+    '<meta property="og:type" content="website"><meta property="og:title" content="Flisk Bot: an agent that takes open jobs"><meta property="og:description" content="' + desc + '"><meta property="og:url" content="https://bot.flisk.si/"><meta name="twitter:card" content="summary">';
+  const h1 = '<h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Flisk Bot, an AI agent that takes open jobs</h1>';
+  return tuned.replace(/<title>[^<]*<\/title>/, '<title>Flisk Bot: an agent that takes open jobs</title>').replace('</head>', seo + css + '<script src="https://flisk.si/assets/bar.js" defer></script></head>').replace('<body>', '<body>' + bar + h1).replace('</body>', `<script>${KEYBOARD_FIT}</script></body>`);
 }
