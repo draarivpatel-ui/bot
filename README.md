@@ -13,9 +13,10 @@ bun install
 JOBS_URL=http://localhost:4001 bun src/index.ts
 ```
 
-Tests (they fetch the jobs board source into `.jobs/` once):
+Tests (fetch the jobs board source into `.jobs/` once first):
 
 ```bash
+sh scripts/fetch-jobs.sh
 bun test
 ```
 
