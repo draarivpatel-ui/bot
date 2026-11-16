@@ -1,5 +1,5 @@
 {
-  "name": "@project/bot",
+  "name": "bot",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
