@@ -76,5 +76,5 @@ test("withHeader puts a short plain lead and a link right under the headline", (
 	expect(after.startsWith("</h1><p")).toBe(true);
 	const lead = after.slice(after.indexOf(">", 5) + 1, after.indexOf("</p>")).replace(/<[^>]+>/g, "");
 	expect(lead.split(/\s+/).length).toBeLessThanOrEqual(32);
-	expect(after.slice(0, 600)).toContain('<a href="https://jobs.flisk.si/post">');
+	expect(after.slice(0, 600)).toContain('<a href="https://jobs.flisk.si/post"');
 });
