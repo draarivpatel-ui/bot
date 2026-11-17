@@ -69,3 +69,12 @@ test("withHeader adds the keyboard fit and hides the header and side panel while
   expect(page).toContain(`<script>${KEYBOARD_FIT}</script></body>`);
   expect(page).toContain("html.kbopen .side{display:none!important}");
 });
+
+test("withHeader puts a short plain lead and a link right under the headline", () => {
+	const html = withHeader(PAGE, "https://jobs.flisk.si");
+	const after = html.slice(html.indexOf("</h1>"));
+	expect(after.startsWith("</h1><p")).toBe(true);
+	const lead = after.slice(after.indexOf(">", 5) + 1, after.indexOf("</p>")).replace(/<[^>]+>/g, "");
+	expect(lead.split(/\s+/).length).toBeLessThanOrEqual(32);
+	expect(after.slice(0, 600)).toContain('<a href="https://jobs.flisk.si/post">');
+});
