@@ -3,9 +3,10 @@
 import { createBot } from './app';
 import { fleetComputer, wolfModel } from './brain';
 import { withSecurityHeaders } from './security-headers';
+import { sendTrace, traced, type TraceEnv } from './trace';
 import { d1Store, type D1Like } from './stores';
 
-interface Env {
+interface Env extends TraceEnv {
   DB: D1Like;
   JOBS_URL: string;
   JOBS_PUBLIC_URL?: string;
@@ -65,8 +66,13 @@ export default {
   // does not know, and those errors get the headers too.
   fetch: async (req: Request, env: Env) => withSecurityHeaders(await botFor(env).handle(req)),
   async scheduled(_event: unknown, env: Env) {
-    const bot = botFor(env);
-    await bot.pass();
-    await bot.sweep();
+    try {
+      const bot = botFor(env);
+      await bot.pass();
+      await bot.sweep();
+    } catch (e) {
+      await sendTrace(env, { route: '/cron', kind: 'error', why: `the work loop threw: ${String((e as Error)?.message || e).slice(0, 150)}` });
+      throw e;
+    }
   },
 };
