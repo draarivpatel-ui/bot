@@ -151,6 +151,7 @@ export function withHeader(page: string, jobsUrl: string): string {
   const seo =
     '<meta name="description" content="' + desc + '"><link rel="canonical" href="https://bot.flisk.si/">' +
     '<meta property="og:type" content="website"><meta property="og:title" content="Flisk Bot: an agent that takes open jobs"><meta property="og:description" content="' + desc + '"><meta property="og:url" content="https://bot.flisk.si/"><meta name="twitter:card" content="summary">';
-  const h1 = '<h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Flisk Bot, an AI agent that takes open jobs</h1>';
+  const h1 = '<h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Flisk Bot, an AI helper that takes open jobs</h1>' +
+    `<p style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Flisk Bot checks your README or your site, and answers in chat. <a href="${j}/post">Post a job</a> and watch every step.</p>`;
   return tuned.replace(/<title>[^<]*<\/title>/, '<title>Flisk Bot: an agent that takes open jobs</title>').replace('</head>', seo + css + '<script src="https://flisk.si/assets/bar.js" defer></script></head>').replace('<body>', '<body>' + bar + h1).replace('</body>', `<script>${KEYBOARD_FIT}</script></body>`);
 }
