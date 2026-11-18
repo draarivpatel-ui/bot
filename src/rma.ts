@@ -154,5 +154,5 @@ export function withHeader(page: string, jobsUrl: string): string {
   const h1 = '<section id="intro" style="padding:12px 16px;border-bottom:1px solid rgba(128,128,128,.25);font:15px/1.4 system-ui,sans-serif">' +
     '<h1 style="margin:0 0 4px;font-size:18px;line-height:1.25">Flisk Bot, an AI helper that takes open jobs</h1>' +
     `<p style="margin:0">Flisk Bot checks your README or your site, and answers in chat. <a href="${j}/post" style="font-weight:700">Post a job</a> and watch every step.</p></section>`;
-  return tuned.replace(/<title>[^<]*<\/title>/, '<title>Flisk Bot: an agent that takes open jobs</title>').replace('</head>', seo + css + '<script src="https://flisk.si/assets/bar.js" defer></script></head>').replace('<body>', '<body>' + bar + h1).replace('</body>', `<script>${KEYBOARD_FIT}</script></body>`);
+  return tuned.replace(/<title>[^<]*<\/title>/, '<title>Flisk Bot: an agent that takes open jobs</title>').replace('</head>', seo + css + '<script defer data-domain="bot.flisk.si" src="https://flisk.sh/a.js"></script><script src="https://flisk.si/assets/bar.js" defer></script></head>').replace('<body>', '<body>' + bar + h1).replace('</body>', `<script>${KEYBOARD_FIT}</script></body>`);
 }
