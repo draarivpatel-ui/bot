@@ -30,6 +30,15 @@ test('an unknown path is a JSON 404 and still gets the headers', async () => {
   expect(res.headers.get('x-frame-options')).toBe('SAMEORIGIN');
 });
 
+test('the board page carries the Flisk analytics beacon, and its CSP allows the tracker and the beacon', async () => {
+  const res = await call('/');
+  const html = await res.text();
+  expect(html).toContain('<script defer data-domain="bot.flisk.si" src="https://flisk.sh/a.js">');
+  const csp = res.headers.get('content-security-policy') ?? '';
+  expect(csp).toContain('https://flisk.sh');
+  expect(csp).toContain('https://analytics.flisk.si');
+});
+
 test('the home page keeps its own CSP (frame-ancestors none) and its nosniff, with no duplicate', async () => {
   const res = await call('/');
   const csp = res.headers.get('content-security-policy') ?? '';
