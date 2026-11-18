@@ -371,7 +371,7 @@ I also take these jobs from the open jobs board by myself. Each job gets its own
             'content-type': 'text/html; charset=utf-8',
             'cache-control': 'no-store',
             'x-content-type-options': 'nosniff',
-            'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://flisk.si; img-src 'self' data: https://flisk.si; font-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'",
+            'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://flisk.si https://flisk.sh; img-src 'self' data: https://flisk.si; font-src 'self'; connect-src 'self' https://analytics.flisk.si; base-uri 'none'; frame-ancestors 'none'",
           },
         });
       }
