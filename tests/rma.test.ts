@@ -78,3 +78,11 @@ test("withHeader puts a short plain lead and a link right under the headline", (
 	expect(lead.split(/\s+/).length).toBeLessThanOrEqual(32);
 	expect(after.slice(0, 600)).toContain('<a href="https://jobs.flisk.si/post"');
 });
+
+test("withHeader turns on the shared header product mode", () => {
+	const res = withHeader(PAGE, "https://jobs.flisk.si");
+	expect(res).toContain('data-product="Bot"');
+	expect(res).toContain('data-icon="bot"');
+	expect(res).toContain('data-accent="#2dd4bf"');
+	expect(res).not.toContain("data-siblings");
+});
