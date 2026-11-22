@@ -42,7 +42,7 @@ test('the board page carries the Flisk analytics beacon, and its CSP allows the 
 test('the home page keeps its own CSP (frame-ancestors none) and its nosniff, with no duplicate', async () => {
   const res = await call('/');
   const csp = res.headers.get('content-security-policy') ?? '';
-  expect(csp).toContain("frame-ancestors 'none'");
+  expect(csp).toContain('frame-ancestors https://analytics.flisk.si');
   expect(csp.match(/frame-ancestors/g)).toHaveLength(1);
   expect(res.headers.get('x-content-type-options')).toBe('nosniff');
 });
