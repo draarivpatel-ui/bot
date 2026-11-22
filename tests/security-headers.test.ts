@@ -26,7 +26,7 @@ test('the home page, robots, sitemap and a 404 all carry the baseline headers', 
 test('an unknown path is a JSON 404 and still gets the headers', async () => {
   const res = await call('/nothing-here');
   expect(res.status).toBe(404);
-  expect(res.headers.get('content-security-policy')).toBe("frame-ancestors 'self'");
+  expect(res.headers.get('content-security-policy')).toBe("frame-ancestors 'self' https://analytics.flisk.si");
   expect(res.headers.get('x-frame-options')).toBe('SAMEORIGIN');
 });
 
@@ -52,6 +52,6 @@ test('a missing header is added, an existing one is kept and an existing CSP gai
   expect(res.status).toBe(201);
   expect(await res.text()).toBe('x');
   expect(res.headers.get('x-frame-options')).toBe('DENY');
-  expect(res.headers.get('content-security-policy')).toBe("default-src 'none'; frame-ancestors 'self'");
+  expect(res.headers.get('content-security-policy')).toBe("default-src 'none'; frame-ancestors 'self' https://analytics.flisk.si");
   expect(res.headers.get('x-content-type-options')).toBe('nosniff');
 });

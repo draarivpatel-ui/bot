@@ -15,7 +15,7 @@ export function withSecurityHeaders(response: Response): Response {
   // Content-Security-Policy: add only frame-ancestors, and only when the policy has none. An existing policy is otherwise untouched
   // (the bot's pages already send one with frame-ancestors 'none', which is stricter than 'self' and stays).
   const csp = headers.get('content-security-policy');
-  if (!csp) headers.set('content-security-policy', "frame-ancestors 'self'");
-  else if (!/(^|;)\s*frame-ancestors\s/i.test(csp)) headers.set('content-security-policy', `${csp.replace(/;\s*$/, '')}; frame-ancestors 'self'`);
+  if (!csp) headers.set('content-security-policy', "frame-ancestors 'self' https://analytics.flisk.si");
+  else if (!/(^|;)\s*frame-ancestors\s/i.test(csp)) headers.set('content-security-policy', `${csp.replace(/;\s*$/, '')}; frame-ancestors 'self' https://analytics.flisk.si`);
   return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 }
