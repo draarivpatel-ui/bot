@@ -335,7 +335,7 @@ I also take these jobs from the open jobs board by myself. Each job gets its own
         const page = (status: number, title: string, body: string) =>
           new Response(
             `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>${escHtml(title)}</title><style>body{font:16px/1.55 system-ui,sans-serif;max-width:760px;margin:40px auto;padding:0 16px;color:#111;background:#fafaf7}h1{font-size:24px}h2{font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:#555;margin-top:32px}pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #ddd;padding:12px;font:13px/1.5 ui-monospace,monospace}p.m{color:#555;font-size:14px}a{color:#0a6}</style>${body}</html>`,
-            { status, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff', 'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'" } },
+            { status, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff', 'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; frame-ancestors https://analytics.flisk.si; form-action 'none'" } },
           );
         if (!j?.result || j.kind !== 'task') return page(404, 'No result here', '<h1>No result here</h1><p>This job has no result from the bot.</p>');
         const steps = (j.result.steps ?? []).map((s) => `<pre>${escHtml(s.kind === 'run' ? `$ ${s.what}` : `${s.kind} ${s.what}`)}\n${escHtml(s.output)}</pre>`).join('');
@@ -355,7 +355,7 @@ I also take these jobs from the open jobs board by myself. Each job gets its own
         return new Response(
           `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Computers · ${escHtml(cfg.name)}</title><style>body{font:16px/1.55 system-ui,sans-serif;max-width:760px;margin:40px auto;padding:0 16px;color:#111;background:#fafaf7}h1{font-size:24px}p.m{color:#555;font-size:14px}a{color:#0a6}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid #ddd}th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:#555}</style>` +
             `<p class="m"><a href="/">${escHtml(cfg.name)}</a></p><h1>Computers</h1><p>When a job needs something run, ${escHtml(cfg.name)} starts a throwaway computer on <a href="${fleet}">fleet</a> and deletes it when the job ends. fleet picks the cheapest of these providers that works. The list is read live from fleet.</p>${list}<p class="m"><a href="${fleet}/v1/prices">fleet's price list</a> · <a href="https://host.flisk.si/rating">which providers need no card</a></p></html>`,
-          { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'public, max-age=300', 'x-content-type-options': 'nosniff', 'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'" } },
+          { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'public, max-age=300', 'x-content-type-options': 'nosniff', 'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; frame-ancestors https://analytics.flisk.si; form-action 'none'" } },
         );
       }
       if (path.startsWith('/fonts/') && req.method === 'GET') {
@@ -371,7 +371,7 @@ I also take these jobs from the open jobs board by myself. Each job gets its own
             'content-type': 'text/html; charset=utf-8',
             'cache-control': 'no-store',
             'x-content-type-options': 'nosniff',
-            'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://flisk.si https://flisk.sh; img-src 'self' data: https://flisk.si; font-src 'self'; connect-src 'self' https://analytics.flisk.si; base-uri 'none'; frame-ancestors 'none'",
+            'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' https://flisk.si https://flisk.sh; img-src 'self' data: https://flisk.si; font-src 'self'; connect-src 'self' https://analytics.flisk.si; base-uri 'none'; frame-ancestors https://analytics.flisk.si",
           },
         });
       }
