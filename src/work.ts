@@ -58,7 +58,7 @@ export function parseAsk(text: string): { kind: Kind; input: Record<string, stri
   const gh = /(?:github\.com\/)?\b([A-Za-z0-9-]{1,39}\/[A-Za-z0-9._-]{1,100})\b/.exec(text.replace(/https?:\/\/(?!github\.com)[^\s]+/g, ''));
   if (/github\.com\//.test(text) || (gh && !/https?:\/\//.test(text) && /readme|repo|score|^\s*[\w-]+\/[\w.-]+\s*$/i.test(text))) {
     const m = /github\.com\/([A-Za-z0-9-]{1,39}\/[A-Za-z0-9._-]{1,100})/.exec(text)?.[1] ?? gh?.[1];
-    if (m) return { kind: 'readme-score', input: { repo: m.replace(/\.git$/, '').replace(/[.,;:]+$/, '') } };
+    if (m) return { kind: 'readme-score', input: { repo: m.replace(/[.,;:]+$/, '').replace(/\.git$/, '') } };
   }
   const url = /https:\/\/[^\s<>"']+/.exec(text)?.[0]?.replace(/[.,;:)]+$/, '');
   if (url) return { kind: 'ai-findable', input: { url } };
